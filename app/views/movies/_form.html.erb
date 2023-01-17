@@ -1,6 +1,15 @@
 <%= form_with(model: movie) do |f| %>
   <%= f.label :title %>
   <%= f.text_field :title %>
+  
+  <%= f.label :director %>
+  <%= f.text_field :director %>
+  
+  <%= f.label :duration %>
+  <%= f.text_field :duration %>
+  
+  <%= f.label :image_file_name %>
+  <%= f.text_field :image_file_name %>
 
   <%= f.label :description %>
   <%= f.text_area :description, rows: 7 %>
