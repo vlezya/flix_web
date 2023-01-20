@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
+  before_action :require_login, except: [:new, :create]
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
   before_action :set_user, only: [:show, :update, :edit, :destroy]
+  
   def index
     @users = User.all
   end
@@ -44,5 +47,12 @@ class UsersController < ApplicationController
   
   def set_user
     @user = User.find(params[:id])
+  end
+  
+  def require_correct_user
+    @user = User.find(params[:id])
+    unless current_user?(@user)
+      redirect_to movies_path, status: :see_other
+    end
   end
 end
