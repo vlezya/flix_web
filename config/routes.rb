@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :genres
   root "movies#index"
   
   resources :users
@@ -10,5 +11,6 @@ Rails.application.routes.draw do
   
   resources :movies do
     resources :reviews
+    resources :favorites, only: [:create, :destroy]
   end
 end
