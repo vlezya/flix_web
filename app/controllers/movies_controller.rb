@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   before_action :require_admin, except: [:index, :show]
   
   def index
-    @movies = Movie.release
+    @movies = Movie.recent(5)
   end
   
   def show
