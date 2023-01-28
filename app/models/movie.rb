@@ -18,8 +18,8 @@ class Movie < ApplicationRecord
   
   scope :release, -> { where('released_on < ?', Time.now).order('released_on desc') } # or .order(released_on: :desc)
   scope :upcoming, -> { where('released_on > ?', Time.now).order('released_on desc') }
-  scope :recent, ->(max) { release.limit(max) }
-  scope :hits, -> { release.where('total_gross >= 300000000').order(total_gross: :desc) }
+  scope :recent, ->(max=5) { release.limit(max) }
+  scope :hits, -> { release.where('total_gross > 300000000').order(total_gross: :desc) }
   scope :flops, -> { release.where('total_gross < 225000000').order(total_gross: :asc) }
     
   def flop?
