@@ -1,3 +1,27 @@
+User.create!([
+  {
+    name: 'Stas',
+    email: 'test@test.com',
+    password: '123456qwer',
+    password_confirmation: '123456qwer',
+    admin: true
+  },
+  {
+    name: 'Denis',
+    email: 'test1@test.com',
+    password: '123456qwer',
+    password_confirmation: '123456qwer',
+    admin: false
+  },
+  {
+    name: 'Anna',
+    email: 'test2@test.com',
+    password: '123456qwer',
+    password_confirmation: '123456qwer',
+    admin: true
+  }
+])
+  
 Movie.create!([
   {
     title: 'Avengers: Endgame',
