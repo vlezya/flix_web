@@ -12,10 +12,12 @@ class Movie < ApplicationRecord
   RATINGS = %w(G PG PG-13 R NC-17)
   
   validates :title, presence: true, uniqueness: true
-  validates :title, :released_on, :duration, presence: true
+  validates :released_on, :duration, presence: true
   validates :description, length: { minimum: 25 }
   validates :total_gross, numericality: { greater_than_or_equal_to: 0 }
   validates :rating, inclusion: { in: RATINGS }
+  
+  validate :acceptable_image
   
   scope :release, -> { where('released_on < ?', Time.now).order('released_on desc') } # or .order(released_on: :desc)
   scope :upcoming, -> { where('released_on > ?', Time.now).order('released_on desc') }
@@ -40,7 +42,21 @@ class Movie < ApplicationRecord
   end
   
   private
-    def set_slug
-      self.slug = title.parameterize
+  
+  def set_slug
+    self.slug = title.parameterize
+  end
+  
+  def acceptable_image
+    return unless main_image.attached?
+    
+    unless main_image.blob.byte_size <= 1.megabyte
+      errors.add(:mane_image, 'image is to big')
     end
+    
+    acceptable_types = ["image/jpeg", "image/png"]
+    unless acceptable_types.include?(main_image.content_type)
+      errors.add(:main_image, 'must be a JPEG or PNG')
+    end
+  end
 end
