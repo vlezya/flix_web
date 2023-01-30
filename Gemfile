@@ -48,4 +48,4 @@ group :test do
   gem "webdrivers"
 end
 
-gem "aws-sdk-s3"
+gem "aws-sdk-s3", require: false

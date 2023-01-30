@@ -11,7 +11,6 @@ namespace :fly do
   #  - full access to secrets, databases
   #  - failures here prevent deployment
   # task :release => 'db:drop'
-  # task :release => 'db:create'
   task :release => 'db:migrate'
   # task :release => 'db:seed'
 
