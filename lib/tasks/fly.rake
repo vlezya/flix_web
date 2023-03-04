@@ -4,14 +4,14 @@ namespace :fly do
   #  - changes to the filesystem made here DO get deployed
   #  - NO access to secrets, volumes, databases
   #  - Failures here prevent deployment
-  task :build => 'assets:precompile'
+  task build: 'assets:precompile'
 
   # RELEASE step:
   #  - changes to the filesystem made here are DISCARDED
   #  - full access to secrets, databases
   #  - failures here prevent deployment
   # task :release => 'db:drop'
-  task :release => 'db:migrate'
+  task release: 'db:migrate'
   # task :release => 'db:seed'
 
   # SERVER step:
@@ -19,7 +19,7 @@ namespace :fly do
   #  - full access to secrets, databases
   #  - failures here result in VM being stated, shutdown, and rolled back
   #    to last successful deploy (if any).
-  task :server => :swapfile do
+  task server: :swapfile do
     sh 'bin/rails server'
   end
 

@@ -3,7 +3,7 @@ module ReviewsHelper
     if movie.average_stars.zero?
       content_tag('span', 'No reviews')
     else
-      "*" * movie.average_stars.round
+      '*' * movie.average_stars.round
     end
   end
 end
